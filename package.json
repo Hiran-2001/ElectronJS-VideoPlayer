@@ -17,11 +17,22 @@
   "main": "public/electron.js",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "electron-builder",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "concurrently -k \"BROWSER=none npm start\" \"npm:electron\"",
-    "electron": "wait-on tcp:3000 && electron ."
+    "electron": "wait-on tcp:3000 && electron .",
+    "package-win32": "electron-packager . VideoPlayer --platform=win32 --arch=ia32 --out=build --overwrite"
+  },
+  "build": {
+    "appId": "com.enfin.VideoPlayer",
+    "productName": "VideoPlayer",
+    "directories": {
+      "output": "build"
+    },
+    "win": {
+      "target": "nsis"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -44,7 +55,9 @@
   "devDependencies": {
     "concurrently": "^8.2.2",
     "electron": "^27.0.4",
+    "electron-builder": "^24.6.4",
     "electron-is-dev": "^2.0.0",
+    "electron-packager": "^17.1.2",
     "wait-on": "^7.1.0"
   }
 }
